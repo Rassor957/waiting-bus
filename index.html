@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+      <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>等公車</title>
+    <link rel="stylesheet" href="styles.css">
+    </head>
+ <body>
+
+    <!-- 黑色透明玻璃覆蓋 -->
+    <div id="overlay">
+        <button id="startButton" onclick="startApp()">搜尋最近公車站</button>
+    </div>
+    <div id="controls" style="display: none;">
+        <label for="weather">天氣狀況：</label>
+        <select id="weather">
+            <option value="晴">晴</option>
+            <option value="多雲" selected>多雲</option>
+            <option value="陰">陰</option>
+            <option value="陰有靄">陰有靄</option>
+            <option value="陰有雨">陰有雨</option>
+            <option value="陰有雷雨">陰有雷雨</option>
+            <option value="無法取得天氣資料">無法取得天氣資料</option>
+        </select>
+        <br>
+        <label for="time">時間：</label>
+        <input type="range" id="time" min="0" max="23" value="12">
+        <span id="timeDisplay">12:00</span>
+        <br>
+        <button id="toggleTime">啟用/停用時間加速</button>
+    </div>
+
+    <!-- 雲朵 & 太陽 -->
+    <img src="image/svg1.svg" alt="Cloud 1" class="cloud cloud1">
+    <img src="image/svg1.svg" alt="Cloud 2" class="cloud cloud2">
+    <img src="image/svg3.svg" alt="Cloud 3" class="cloud cloud3">
+    <img src="image/svg2.svg" alt="Cloud 4" class="cloud cloud4">
+    <img src="image/svg3.svg" alt="Cloud 5" class="cloud cloud5">
+    <img src="image/svg1.svg" alt="Cloud 6" class="cloud cloud6">
+    <img src="image/svg2.svg" alt="Cloud 7" class="cloud cloud7">
+    <img src="image/svg3.svg" alt="Cloud 8" class="cloud cloud8">
+    <img src="image/svg2.svg" alt="Cloud 9" class="cloud cloud9">
+    <img src="image/svg3.svg" alt="Cloud 10" class="cloud cloud10">
+    <img src="image/sun.svg" alt="Sun" class="sun" style="display: none;">
+
+    <!-- 雨容器 (在雲的後面, z-index=0) -->
+    <canvas id="canvas"></canvas>
+    <div class="rain front-row"></div>
+    <div class="rain back-row"></div>
+    <!-- 這也是霧的部分 -->
+    <div class="fogwrapper">
+        <div id="foglayer_01" class="fog">
+            <div class="image01"></div>
+            <div class="image02"></div>
+        </div>
+        <div id="foglayer_02" class="fog">
+            <div class="image01"></div>
+            <div class="image02"></div>
+        </div>
+        <div id="foglayer_03" class="fog">
+            <div class="image01"></div>
+            <div class="image02"></div>
+        </div>
+    </div>
+
+    <!-- 雨傘提示框（預設隱藏） -->
+    <div class="umbrella-notification" id="umbrellaNotification">
+        <div class="icon-section">
+            <!-- 將下列路徑替換成你實際 umbrella.svg 的位置 -->
+            <img src="image/umbrella.svg" alt="Umbrella Icon">
+        </div>
+        <div class="text-section">
+            <div class="title">提醒</div>
+            <div class="message">記得帶傘！</div>
+        </div>
+        <button class="close-btn" id="closeUmbrellaBtn">&times;</button>
+    </div>
+    <!-- 地圖主面板 -->
+    <div id="mainPanel">
+        <div id="map"></div>
+        <!-- 資訊面板 -->
+        <div id="infoPanel">
+            <button id="closeBtn">X</button>
+            <h3 id="stationTitle">站名</h3>
+            <div class="tabs">
+                <button id="goBtn" class="active">去程</button>
+                <button id="backBtn">回程</button>
+            </div>
+            <div id="goContent" class="tab-content active">
+                <p>去程資料</p>
+            </div>
+            <div id="backContent" class="tab-content">
+                <p>回程資料</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 引入 jQuery (CDN) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJnEKvcG6N6KdtutVViDu6KjHxqIa6jBI&callback=initMap&loading=async">
+</script>
+    <script src="script.js"></script>
+    </body>
+
+</html>
