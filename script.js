@@ -1,14 +1,14 @@
 
         let routeInfoData = null;
 
-        // 載入起點站終點站.json
+        // 載入	origin_destination_stations.json
         async function loadRouteInfo() {
             try {
-                const response = await fetch("起點站終點站.json");
+                const response = await fetch("json/origin_destination_stations.json");
                 routeInfoData = await response.json();
                 console.log("成功載入起點站終點站資料：", routeInfoData);
             } catch (error) {
-                console.error("載入起點站終點站.json 時發生錯誤：", error);
+                console.error("載入origin_destination_stations.json 時發生錯誤：", error);
             }
         }
 
@@ -671,7 +671,7 @@
             });
 
             try {
-                const response = await fetch("json/公車站座標.json");
+                const response = await fetch("json/bus_station_coordinates.json");
                 const data = await response.json();
                 const stops = [];
                 for (const stationName in data) {
